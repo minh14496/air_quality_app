@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Air Quality - {{ title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic" />
+  </head>
+  <body>
+    <nav>
+      <a href="/" class="brand"><span>AIR QUALITY</span></a>
+      <!-- responsive-->
+      <input id="bmenub" type="checkbox" class="show">
+      <label for="bmenub" class="burger pseudo button">Menu</label>
+      <div class="menu">
+        <a href="/cities" class="button warning">City List</a>
+        <a href="/refresh" class="button warning">Refresh Data</a>
+        <a href="/reset" class="button error">Reset Data</a>
+      </div>
+    </nav>
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
+      <div>
+        <!-- <h1>{{ title }}</h1>
+        <form action="/compare" method="post">
+          <select name="user0">
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+          <select name="user1">
+            {% for user in users %}
+            <option value="{{ user.username }}">{{ user.username }}</option>
+            {% endfor %}
+          </select>
+          <input type="text" name="tweet_text" placeholder="Tweet text to predict">
+          <input type="submit" value="Compare Users">
+        </form> -->
+        <table class="primary">
+            <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.datetime }}</td>  
+                    <td>{{ record.value }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+      </div>
+      <div>
+        <h2>City</h2>
+        <form action="/refresh" method="post">
+          <input type="text" name="city_name" placeholder="Enter city name">
+          <input type="submit" value="Add City">
+        </form>
+      </div>
+      {% endblock %}
+    </article>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
+  </body>
+</html>
